@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+     	 http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 测试环境环境配置文件 -->
+	<beans profile="dev">
+		<!-- 1.引入属性文件 -->
+		<context:property-placeholder
+			ignore-unresolvable="true" location="classpath:env/jdbc-dev.properties" />
+
+		<!-- 2.配置dbcp2数据源 -->
+		<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+			<!-- 数据库驱动 -->
+			<property name="driverClassName" value="${jdbc.driverClassName}" />
+			<!-- 连接数据库的url -->
+			<property name="url" value="${jdbc.url}" />
+			<!-- 连接数据库的用户名 -->
+			<property name="username" value="${jdbc.username}" />
+			<!-- 连接数据库的密码 -->
+			<property name="password" value="${jdbc.password}" />
+			<!-- 初始连接数 -->
+			<property name="initialSize" value="${jdbc.initialSize}" />
+			<!-- 最大连接数 -->
+			<property name="maxTotal" value="${jdbc.maxTotal}" />
+			<!-- 最大空闲连接数 -->
+			<property name="maxIdle" value="${jdbc.maxIdle}" />
+			<!-- 最小空闲连接数 -->
+			<property name="minIdle" value="${jdbc.minIdle}" />
+			<!-- 当Statement或连接被泄露时是否打印程序的stack traces日志 -->
+			<property name="logAbandoned" value="${jdbc.logAbandoned}" />
+			<!-- 配置检测连接池泄露的方式:OnMaintenance按照间隔时间,OnBorrow每次获取连接时 -->
+			<property name="removeAbandonedOnMaintenance" value="${jdbc.removeAbandonedOnMaintenance}" />
+			<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+			<property name="timeBetweenEvictionRunsMillis" value="60000" />
+			<!-- 泄露的连接被删除的超时时间 -->
+			<property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
+			<!-- 线程池等待超时时间 -->
+			<property name="maxWaitMillis" value="${jdbc.maxWaitMillis}" />
+			<!-- 标识连接是否自动提交 -->
+			<property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}" />
+			<!-- 标识是否检测连接可用 -->
+			<property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+			<!-- 验证数据库连接是否可用的查询语句 -->
+			<property name="validationQuery" value="${jdbc.validationQuery}" />
+		</bean>
+	</beans>
+
+</beans>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd" 
+        default-autowire="byType">
+
+	<!-- 注解bean扫描,spring扫描排除Controller -->
+	<context:annotation-config />
+	<context:component-scan base-package="com.study">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<!-- 下面可以导入其他spring配置文件 -->
+	<import resource="classpath:/spring-env.xml" />
+	<import resource="classpath:/spring-datasource.xml"/>
+	<import resource="classpath:/spring-transaction.xml"/>
+
+	<!-- 下面可以声明bean -->
+	<!-- <bean id="id.student1" name="name.student1" class="com.study.testBean.Student">
+		<property name="name" value="小明"></property>
+		<property name="age" value="12"></property>
+	</bean>
+	<bean id="id.student2" name="name.student2" class="com.study.testBean.Student">
+		<property name="name" value="小李"></property>
+		<property name="age" value="33"></property>
+	</bean> -->
+	<bean class="com.study.testBean.Student">
+		<property name="name" value="小张"></property>
+		<property name="age" value="28"></property>
+	</bean>
+</beans>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.study.base.dao.TeacherMapper">
+	<resultMap id="TeacherInf" type="com.study.testBean.Teacher">
+		<result column="ID" property="id" />
+		<result column="NAME" property="name" />
+	</resultMap>
+
+	<sql id="Teacher_Column_List">
+		ID, NAME
+	</sql>
+
+	<select id="getTeacherById" resultMap="TeacherInf" parameterType="int">
+		select
+		<include refid="Teacher_Column_List" />
+		from tbl_teacher_inf
+		<where>
+			ID = #{id}
+		</where>
+	</select>
+	
+	<select id="getTeacherPageable"  resultMap="TeacherInf" parameterType="com.study.base.vo.TeacherVo">
+	select
+	<include refid="Teacher_Column_List" />
+		from tbl_teacher_inf
+		<where>
+			ID > #{id}
+		</where>
+	</select>
+</mapper>

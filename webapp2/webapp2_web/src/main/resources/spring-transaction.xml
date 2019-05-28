@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- 3.配置mybatis会话工厂 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/mybatis/mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath*:/mybatis/mapper/**/*.xml" />
+	</bean>
+
+	<!-- 4.自动扫描对象关系映射 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- Mapper接口所在包名，Spring会自动查找其下的Mapper -->
+		<property name="basePackage" value="com.study" />
+		<!--annotation 标注Mapper -->
+		<property name="annotationClass" value="com.study.base.mybatis.annotation.MyBatis" />
+	</bean>
+
+	<!-- 5.定义事物管理器, 由spring管理事务 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 6.注解事务 -->
+	<tx:annotation-driven />
+</beans>
