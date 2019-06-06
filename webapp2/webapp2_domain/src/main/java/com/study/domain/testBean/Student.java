@@ -1,4 +1,4 @@
-package com.study.testBean;
+package com.study.domain.testBean;
 
 public class Student {
 	private String name;

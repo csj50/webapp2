@@ -1,0 +1,141 @@
+<configuration>
+	<property name="log.base" value="/appserver/logs/webapp2" />
+	<property name="pattern"
+		value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{sessionId}] %-5level [%thread] %logger{80} :%msg%n" />
+
+	<!-- 控制台输出 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${pattern}</pattern>
+		</encoder>
+	</appender>
+
+
+	<!--logback根 -->
+	<appender name="root"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.base}/webapp2-root.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.base}/%d{yyyy-MM-dd}/webapp2-root-%i.%d{yyyy-MM-dd}.log.gz
+			</fileNamePattern>
+			<TimeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<MaxFileSize>30MB</MaxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!--异常信息 -->
+	<appender name="webapp2-exception"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.base}/webapp2-exception.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.base}/%d{yyyy-MM-dd}/webapp2-exception-%i.%d{yyyy-MM-dd}.log.gz
+			</fileNamePattern>
+			<TimeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<MaxFileSize>30MB</MaxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- web模块 -->
+	<appender name="webapp2-web"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.base}/webapp2-web.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.base}/%d{yyyy-MM-dd}/webapp2-web-%i.%d{yyyy-MM-dd}.log.gz
+			</fileNamePattern>
+			<TimeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<MaxFileSize>30MB</MaxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- module1模块 -->
+	<appender name="webapp2-module1"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.base}/webapp2-module1.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.base}/%d{yyyy-MM-dd}/webapp2-module1-%i.%d{yyyy-MM-dd}.log.gz
+			</fileNamePattern>
+			<TimeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<MaxFileSize>30MB</MaxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- module2模块 -->
+	<appender name="webapp2-module2"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.base}/webapp2-module2.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.base}/%d{yyyy-MM-dd}/webapp2-module2-%i.%d{yyyy-MM-dd}.log.gz
+			</fileNamePattern>
+			<TimeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<MaxFileSize>30MB</MaxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 日志过滤 -->
+	<logger name="org.springframework">
+		<level value="error" />
+	</logger>
+
+	<logger name="org.apache">
+		<level value="error" />
+	</logger>
+
+	<logger name="java.sql">
+		<level value="error" />
+	</logger>
+
+	<logger name="org.mybatis">
+		<level value="error" />
+	</logger>
+
+
+	<logger name="com.study.web" additivity="false">
+		<level value="info" />
+		<appender-ref ref="webapp2-web" />
+	</logger>
+
+	<logger name="com.sutdy.module1" additivity="false">
+		<level value="info" />
+		<appender-ref ref="webapp2_module1" />
+	</logger>
+
+	<logger name="com.sutdy.module2" additivity="false">
+		<level value="info" />
+		<appender-ref ref="webapp2_module2" />
+	</logger>
+
+	<logger name="com.study.exception" additivity="false">
+		<level value="info" />
+		<appender-ref ref="webapp2-exception" />
+	</logger>
+
+	<!-- root级别控制 -->
+	<root level="trace">
+		<appender-ref ref="root" />
+	</root>
+</configuration>  

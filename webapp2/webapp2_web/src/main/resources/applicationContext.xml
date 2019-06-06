@@ -28,7 +28,7 @@
 		<property name="name" value="小李"></property>
 		<property name="age" value="33"></property>
 	</bean> -->
-	<bean class="com.study.testBean.Student">
+	<bean class="com.study.domain.testBean.Student">
 		<property name="name" value="小张"></property>
 		<property name="age" value="28"></property>
 	</bean>

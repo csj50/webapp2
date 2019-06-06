@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.study.base.dao.TeacherMapper">
-	<resultMap id="TeacherInf" type="com.study.testBean.Teacher">
+	<resultMap id="TeacherInf" type="com.study.domain.testBean.Teacher">
 		<result column="ID" property="id" />
 		<result column="NAME" property="name" />
 	</resultMap>

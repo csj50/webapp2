@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
@@ -14,18 +15,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.study.base.dao.TeacherMapper;
+import com.study.base.util.ApplicationContextHolder;
+import com.study.base.util.PropertiesUtil;
+import com.study.base.util.ReflectInvokeUtil;
 import com.study.base.vo.TeacherVo;
-import com.study.testBean.Student;
-import com.study.testBean.Teacher;
-import com.study.util.ApplicationContextHolder;
-import com.study.util.PropertiesUtil;
-import com.study.util.ReflectInvokeUtil;
+import com.study.domain.testBean.Student;
+import com.study.domain.testBean.Teacher;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:applicationContext.xml","classpath:spring-mvc.xml"})
 @ActiveProfiles("dev")
 public class MyTest {
+	protected static Logger logger = LoggerFactory.getLogger(MyTest.class);
 
 	@Value("${flag}")
 	String flag;
@@ -83,5 +85,11 @@ public class MyTest {
 		teacherVo.setPageSize(4);
 		List<Teacher> list = teacherMapper.getTeacherPageable(teacherVo);
 		System.out.println("list size is:" + list.size());
+	}
+	
+	@Test
+	public void testLog() {
+		int i = 1;
+		logger.info("日志测试1: {}", i);
 	}
 }

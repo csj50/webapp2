@@ -9,7 +9,7 @@
 	<beans profile="dev">
 		<context:property-placeholder
 			ignore-unresolvable="true" location="classpath:/env/configurations-dev.properties" />
-		<bean id="consoleProperties" class="com.study.util.PropertiesUtil">
+		<bean id="consoleProperties" class="com.study.base.util.PropertiesUtil">
 			<property name="order" value="1" />
 			<property name="ignoreUnresolvablePlaceholders" value="true" />
 			<property name="location">
@@ -21,7 +21,7 @@
 	<beans profile="sit">
 		<context:property-placeholder
 			ignore-unresolvable="true" location="classpath:/env/configurations-sit.properties" />
-		<bean id="consoleProperties" class="com.study.util.PropertiesUtil">
+		<bean id="consoleProperties" class="com.study.base.util.PropertiesUtil">
 			<property name="order" value="1" />
 			<property name="ignoreUnresolvablePlaceholders" value="true" />
 			<property name="location">
@@ -33,7 +33,7 @@
 	<beans profile="uat">
 		<context:property-placeholder
 			ignore-unresolvable="true" location="classpath:/env/configurations-uat.properties" />
-		<bean id="consoleProperties" class="com.study.util.PropertiesUtil">
+		<bean id="consoleProperties" class="com.study.base.util.PropertiesUtil">
 			<property name="order" value="1" />
 			<property name="ignoreUnresolvablePlaceholders" value="true" />
 			<property name="location">
@@ -45,7 +45,7 @@
 	<beans profile="pit">
 		<context:property-placeholder
 			ignore-unresolvable="true" location="classpath:/env/configurations-pit.properties" />
-		<bean id="consoleProperties" class="com.study.util.PropertiesUtil">
+		<bean id="consoleProperties" class="com.study.base.util.PropertiesUtil">
 			<property name="order" value="1" />
 			<property name="ignoreUnresolvablePlaceholders" value="true" />
 			<property name="location">

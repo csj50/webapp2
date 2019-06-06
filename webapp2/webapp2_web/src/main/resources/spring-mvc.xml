@@ -14,7 +14,7 @@
 	<context:annotation-config />
 
 	<!-- 只扫描Controller -->
-	<context:component-scan base-package="com.study.resources">
+	<context:component-scan base-package="com.study.web.resources">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>

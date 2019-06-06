@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.study.base.mybatis.annotation.MyBatis;
 import com.study.base.vo.TeacherVo;
-import com.study.testBean.Teacher;
+import com.study.domain.testBean.Teacher;
 
 @MyBatis
 public interface TeacherMapper {
