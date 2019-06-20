@@ -1,7 +1,7 @@
 <configuration>
 	<property name="log.base" value="/appserver/logs/webapp2" />
 	<property name="pattern"
-		value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{sessionId}] %-5level [%thread] %logger{80} :%msg%n" />
+		value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{IP}] [%X{sessionId}] [%X{logId}] [%X{bizId}] %-5level [%thread] %logger{80} [%line]:%msg%n" />
 
 	<!-- 控制台输出 -->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -129,8 +129,8 @@
 		<appender-ref ref="webapp2_module2" />
 	</logger>
 
-	<logger name="com.study.exception" additivity="false">
-		<level value="info" />
+	<logger name="com.study.base.exception" additivity="false">
+		<level value="error" />
 		<appender-ref ref="webapp2-exception" />
 	</logger>
 

@@ -32,4 +32,7 @@
 		<property name="name" value="小张"></property>
 		<property name="age" value="28"></property>
 	</bean>
+	
+	<!--配置全局异常处理器-->
+	<bean class="com.study.base.exception.ExceptionResolver"/>
 </beans>
