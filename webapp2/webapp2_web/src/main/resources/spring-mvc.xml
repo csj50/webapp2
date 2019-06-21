@@ -35,4 +35,11 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<!-- 注册拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.study.base.interceptor.MdcSessionInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
