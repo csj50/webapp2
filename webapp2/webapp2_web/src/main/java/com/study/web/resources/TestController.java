@@ -1,18 +1,25 @@
 package com.study.web.resources;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.study.base.exception.BizException;
 import com.study.base.exception.SysException;
+import com.study.base.sender.QueueSender;
 
 @Controller
 @RequestMapping("mvc")
 public class TestController {
 	private static Logger log = LoggerFactory.getLogger(TestController.class);
 
+	@Autowired
+	QueueSender queueSender;
+	
 	@RequestMapping("hello")
 	private String hello() {
 		log.info("hello in...");
@@ -32,5 +39,11 @@ public class TestController {
 		log.info("testError2 in...");
 		log.info("testError2 out...");
 		throw new SysException("0987654321", "报错信息2");
+	}
+	
+	@RequestMapping("queueSend")
+	public void queueSend(HttpServletRequest request) {
+		String msg = request.getParameter("msg");
+		queueSender.send(msg);
 	}
 }

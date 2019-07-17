@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:jms="http://www.springframework.org/schema/jms" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/jms
+        http://www.springframework.org/schema/jms/spring-jms.xsd
+        http://activemq.apache.org/schema/core
+        http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+	<!-- JSM服务商提供的连接工厂 -->
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<!-- broker地址 -->
+		<property name="brokerURL" value="${broker_url}" />
+		<!-- 强制使用异步发送 -->
+		<property name="useAsyncSend" value="true" />
+		<!-- 是否允许send方法复制JMS Message对象 -->
+		<property name="copyMessageOnSend" value="false" />
+		<!-- 优化ACK选项 -->
+		<property name="optimizeAcknowledge" value="true" />
+	</bean>
+
+	<!-- spring提供带缓存功能的连接工厂 -->
+	<bean id="jmsFactoryPool"
+		class="org.springframework.jms.connection.CachingConnectionFactory">
+		<!-- 目标connect factory -->
+		<property name="targetConnectionFactory" ref="jmsConnectionFactory" />
+		<!-- Session缓存数量 -->
+		<property name="sessionCacheSize" value="10" />
+	</bean>
+
+	<!-- Spring JMS Template -->
+	<!-- 定义JmsTemplate的Queue类型 -->
+	<bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<constructor-arg ref="jmsFactoryPool" />
+		<!-- 非pub/sub模型（发布/订阅），即队列模式 -->
+		<property name="pubSubDomain" value="false" />
+	</bean>
+
+	<!-- 定义JmsTemplate的Topic类型 -->
+	<bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<constructor-arg ref="jmsFactoryPool" />
+		<!-- pub/sub模型（发布/订阅） -->
+		<property name="pubSubDomain" value="true" />
+	</bean>
+	
+	<!-- 以下定义Queue，Topic，消费者 -->
+	
+	<!-- 定义Queue -->
+	<bean id="helloWorldQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <!-- 设置消息队列的名字 -->
+        <constructor-arg index="0" value="hello.world.async.handle.queue?consumer.prefetchSize=10"/>
+    </bean>
+    
+    <!-- 定义Topic -->
+    <bean id="whoAreYouTopic" class="org.apache.activemq.command.ActiveMQTopic">
+    <constructor-arg index="0" value="who.are.you.handle.topic?consumer.prefetchSize=10"/>
+    </bean>
+
+	<!-- 定义消费者 -->
+	
+	<!-- 消息转换器 -->
+	<bean id="simpleMessageConverter" class="org.springframework.jms.support.converter.SimpleMessageConverter" />
+	
+	<!-- 父消息监听器(公共参数) -->
+	<bean id="parentMessageListener" class="com.study.base.jms.AbstractJmsReceiveTemplate" 
+		scope="prototype" abstract="true">
+		<!-- onMessage委托给execute -->
+		<property name="defaultListenerMethod" value="onReceive" />
+		<property name="messageConverter" ref="simpleMessageConverter" />
+	</bean>
+	
+	<!-- 父消息监听容器(公共参数) -->
+	<bean id="parentListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		abstract="true">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+		<!-- 初始x个Consumer, 可动态扩展到y -->
+		<property name="concurrentConsumers" value="4" />
+		<property name="maxConcurrentConsumers" value="4" />
+		<!-- 设置消息确认模式为Client -->
+		<property name="sessionAcknowledgeModeName" value="CLIENT_ACKNOWLEDGE" />
+	</bean>
+	
+	<!-- 队列异步处理类1 -->
+	<bean id="queueAsyHandler1" class="com.study.base.handler.queueAsyHandler1"
+          parent="parentMessageListener"/>
+	
+	<!-- 队列MQ监听容器1 -->
+    <bean id="queueContainer1" parent="parentListenerContainer">
+        <property name="destination" ref="helloWorldQueue"/>
+        <property name="messageListener" ref="queueAsyHandler1"/>
+    </bean>
+    
+    
+</beans>
