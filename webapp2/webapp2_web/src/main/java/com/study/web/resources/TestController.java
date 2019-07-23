@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.study.base.exception.BizException;
 import com.study.base.exception.SysException;
 import com.study.base.sender.QueueSender;
+import com.study.base.sender.TopicSender;
 
 @Controller
 @RequestMapping("mvc")
@@ -19,6 +20,9 @@ public class TestController {
 
 	@Autowired
 	QueueSender queueSender;
+	
+	@Autowired
+	TopicSender topicSender;
 	
 	@RequestMapping("hello")
 	private String hello() {
@@ -45,5 +49,11 @@ public class TestController {
 	public void queueSend(HttpServletRequest request) {
 		String msg = request.getParameter("msg");
 		queueSender.send(msg);
+	}
+	
+	@RequestMapping("topicSend")
+	public void topicSend(HttpServletRequest request) {
+		String msg = request.getParameter("msg");
+		topicSender.send(msg);
 	}
 }

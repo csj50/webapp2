@@ -1,7 +1,7 @@
 package com.study.base.sender;
 
 import javax.annotation.Resource;
-import javax.jms.Queue;
+import javax.jms.Topic;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,24 +10,23 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 /**
- * 队列发送者
+ * 主题发布者
  * @author User
  *
  */
 @Component
-public class QueueSender {
-
+public class TopicSender {
 	private final static Logger logger = LoggerFactory.getLogger(QueueSender.class);
 	
-	@Resource(name = "helloWorldQueue")
-    private Queue helloWorldQueue;
+	@Resource(name = "whoAreYouTopic")
+    private Topic whoAreYouTopic;
 	
 	@Autowired
-	JmsTemplate jmsQueueTemplate;
+	JmsTemplate jmsTopicTemplate;
 	
 	public void send(String message) {
-		logger.info("send queue msg: {}", message);
-		jmsQueueTemplate.convertAndSend(helloWorldQueue, message);
-		logger.info("send queue msg end...");
+		logger.info("send topic msg: {}", message);
+		jmsTopicTemplate.convertAndSend(whoAreYouTopic, message);
+		logger.info("msg send end...");
 	}
 }

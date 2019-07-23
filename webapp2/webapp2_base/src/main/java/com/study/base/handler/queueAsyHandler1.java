@@ -11,9 +11,9 @@ public class queueAsyHandler1 extends AbstractJmsReceiveTemplate {
     
 	@Override
 	protected void receive(Object param) throws Exception {
-		logger.info("msg receive begin...");
+		logger.info("queue handler1 msg receive begin...");
 		logger.info("param: {}", (String)param);
-		logger.info("msg receive end...");
+		logger.info("queue handler1 msg receive end...");
 		Thread.currentThread().sleep(30*1000);
 	}
 

@@ -96,5 +96,23 @@
         <property name="messageListener" ref="queueAsyHandler1"/>
     </bean>
     
+    <!-- 主题异步处理类1 -->
+    <bean id="topicAsyHandler1" class="com.study.base.handler.topicAsyHandler1"
+          parent="parentMessageListener"/>
+          
+    <!-- 主题异步处理类2 -->
+    <bean id="topicAsyHandler2" class="com.study.base.handler.topicAsyHandler2"
+          parent="parentMessageListener"/>
+          
+    <!-- 主题MQ监听容器1 -->
+    <bean id="topicContainer1" parent="parentListenerContainer">
+        <property name="destination" ref="whoAreYouTopic"/>
+        <property name="messageListener" ref="topicAsyHandler1"/>
+    </bean>
     
+    <!-- 主题MQ监听容器2 -->
+    <bean id="topicContainer2" parent="parentListenerContainer">
+        <property name="destination" ref="whoAreYouTopic"/>
+        <property name="messageListener" ref="topicAsyHandler2"/>
+    </bean>
 </beans>
