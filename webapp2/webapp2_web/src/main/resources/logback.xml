@@ -136,6 +136,8 @@
 
 	<!-- root级别控制 -->
 	<root level="trace">
-		<appender-ref ref="root" />
+		<!-- 控制台需要打印时放开STDOUT -->
+		<!-- <appender-ref ref="STDOUT"/> -->
+        <appender-ref ref="root"/>
 	</root>
 </configuration>  

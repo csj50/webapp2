@@ -47,6 +47,6 @@
 			<!-- 验证数据库连接是否可用的查询语句 -->
 			<property name="validationQuery" value="${jdbc.validationQuery}" />
 		</bean>
+		
 	</beans>
-
 </beans>

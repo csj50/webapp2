@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.study.base.annotation.TimeCount;
 import com.study.base.exception.BizException;
 import com.study.base.exception.SysException;
 import com.study.base.sender.QueueSender;
@@ -25,7 +26,8 @@ public class TestController {
 	TopicSender topicSender;
 	
 	@RequestMapping("hello")
-	private String hello() {
+	@TimeCount
+	public String hello() {
 		log.info("hello in...");
 		log.info("hello out...");
 		return "hello";

@@ -40,4 +40,8 @@ public class ControllerTest {
 		testController.testError();
 	}
 
+	@Test
+	public void testhello() {
+		testController.hello();
+	}
 }
