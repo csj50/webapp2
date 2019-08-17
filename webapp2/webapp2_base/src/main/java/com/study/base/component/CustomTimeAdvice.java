@@ -23,7 +23,7 @@ import com.study.base.util.ApplicationContextHolder;
 @Order(1) //切面执行顺序
 public class CustomTimeAdvice {
 
-	public static Logger logger = LoggerFactory.getLogger(CustomTimeAdvice.class);
+	private static Logger logger = LoggerFactory.getLogger(CustomTimeAdvice.class);
 	
 	/**
 	 * 切入点为添加了@TimeCount注解的方法
@@ -38,7 +38,7 @@ public class CustomTimeAdvice {
 	 * @param timeCount 注解类对象
 	 */
 	@Around(value = "pointCut() && @annotation(timeCount)")
-	public void timeAround(ProceedingJoinPoint point, TimeCount timeCount) {
+	public Object timeAround(ProceedingJoinPoint point, TimeCount timeCount) {
 		//获取被切面方法的方法签名
 		org.aspectj.lang.Signature funSignature = point.getSignature();
 		//返回值的类型
@@ -85,5 +85,7 @@ public class CustomTimeAdvice {
 			//===================================收尾处理================================
 			logger.info("方法消耗时间: {}", end - start);
 		}
+		
+		return respBean;
 	}
 }

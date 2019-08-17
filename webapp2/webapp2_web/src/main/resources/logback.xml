@@ -121,12 +121,12 @@
 
 	<logger name="com.sutdy.module1" additivity="false">
 		<level value="info" />
-		<appender-ref ref="webapp2_module1" />
+		<appender-ref ref="webapp2-module1" />
 	</logger>
 
 	<logger name="com.sutdy.module2" additivity="false">
 		<level value="info" />
-		<appender-ref ref="webapp2_module2" />
+		<appender-ref ref="webapp2-module2" />
 	</logger>
 
 	<logger name="com.study.base.exception" additivity="false">
