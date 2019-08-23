@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.study.base.annotation.TimeCount;
+import com.study.base.component.CacheTestComp;
 import com.study.base.exception.BizException;
 import com.study.base.exception.SysException;
 import com.study.base.sender.QueueSender;
 import com.study.base.sender.TopicSender;
+import com.study.domain.testBean.Teacher;
 
 @Controller
 @RequestMapping("mvc")
@@ -24,6 +26,9 @@ public class TestController {
 	
 	@Autowired
 	TopicSender topicSender;
+	
+	@Autowired
+	CacheTestComp cacheTestComp;
 	
 	@RequestMapping("hello")
 	@TimeCount
@@ -57,5 +62,12 @@ public class TestController {
 	public void topicSend(HttpServletRequest request) {
 		String msg = request.getParameter("msg");
 		topicSender.send(msg);
+	}
+	
+	@RequestMapping("testCache")
+	public void testCache(HttpServletRequest request) {
+		String number = request.getParameter("number");
+		Teacher teacher = cacheTestComp.getTeacherById(Integer.parseInt(number));
+		log.info("name is: {}", teacher.getName());
 	}
 }
