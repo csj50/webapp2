@@ -16,6 +16,9 @@
         <dependent-module archiveName="webapp2_module2-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/webapp2_module2/webapp2_module2">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="webapp2_schedule-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/webapp2_schedule/webapp2_schedule">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/webapp2_web/target/classes"/>
         <property name="context-root" value="webapp2"/>
     </wb-module>
