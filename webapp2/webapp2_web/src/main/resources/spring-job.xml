@@ -12,6 +12,7 @@
         http://www.springframework.org/schema/task/spring-task.xsd
         ">
 	
+	<!-- 定义bean方式 -->
 	<!-- <bean id="threadPoolTaskExecutor"
 		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
 		核心线程数
@@ -22,9 +23,25 @@
 		<property name="queueCapacity" value="25" />
 	</bean> -->
 
-	<bean id="threadPoolTaskScheduler"
+	<!-- <bean id="threadPoolTaskScheduler"
 		class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler">
 		<property name="poolSize" value="5" />
-	</bean>
+	</bean> -->
+	
+	<!-- 命名空间方式 -->
+	<task:scheduler id="threadPoolTaskScheduler" pool-size="5"/>
+	
+	<!-- <task:executor id="threadPoolTaskExecutor"
+		 pool-size="5-10"
+		 queue-capacity="25"
+		 rejection-policy="ABORT"/> -->
+		 
+	<!-- 打开注解驱动 -->
+	<task:annotation-driven proxy-target-class="true"/>
+	
+	<task:scheduled-tasks>
+		<task:scheduled ref="taskJobs" method="job1" initial-delay="5000" fixed-rate="5000"/>
+		<task:scheduled ref="taskJobs" method="job2" cron="*/10 * * * * ?"/>
+	</task:scheduled-tasks>
 	
 </beans>

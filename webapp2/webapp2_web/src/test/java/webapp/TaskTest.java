@@ -7,17 +7,15 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.SyncTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.study.schedule.AsyncTask;
 import com.study.schedule.MessagePrinterTask;
 import com.study.schedule.MyTask1;
 
@@ -31,8 +29,11 @@ public class TaskTest {
 //	@Autowired
 //	ThreadPoolTaskExecutor threadPoolTaskExecutor;
 	
+//	@Autowired
+//	ThreadPoolTaskScheduler threadPoolTaskScheduler;
+	
 	@Autowired
-	ThreadPoolTaskScheduler threadPoolTaskScheduler;
+	AsyncTask asyncTask;
 	
 	@Before
 	public void start() {
@@ -78,17 +79,33 @@ public class TaskTest {
 //		threadPoolTaskExecutor.execute(new MessagePrinterTask("banana"));
 //	}
 	
+//	@Test
+//	public void testThreadPoolTaskScheduler() {
+//		threadPoolTaskScheduler.schedule(new MessagePrinterTask("apple"), new CronTrigger("0/10 * * * * ?"));
+//		threadPoolTaskScheduler.execute(new MessagePrinterTask("banana"));
+//		try {
+//			System.out.println("main thread sleep start.");
+//			Thread.sleep(36000); //睡眠36秒
+//			System.out.println("main thread sleep stop.");
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+	
 	@Test
-	public void testThreadPoolTaskScheduler() {
-		threadPoolTaskScheduler.schedule(new MessagePrinterTask("apple"), new CronTrigger("0/10 * * * * ?"));
-		threadPoolTaskScheduler.execute(new MessagePrinterTask("banana"));
-		try {
-			System.out.println("main thread sleep start.");
-			Thread.sleep(36000); //睡眠36秒
-			System.out.println("main thread sleep stop.");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void asyncTaskTest() throws Exception {
+		asyncTask.start(1);
+		asyncTask.start(2);
+		asyncTask.start(3);
+		asyncTask.start(4);
+		asyncTask.start(5);
+		asyncTask.start(6);
+	}
+	
+	@Test
+	public void schdeuledTaskTest() throws Exception {
+		System.out.println("hello world");
+		Thread.sleep(30000);
 	}
 }

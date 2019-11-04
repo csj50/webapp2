@@ -19,8 +19,8 @@ public class ScheduleStart implements ApplicationListener<ContextRefreshedEvent>
 
 	private static final Logger logger = LoggerFactory.getLogger(ScheduleStart.class);
 	
-	@Autowired
-	ThreadPoolTaskScheduler threadPoolTaskScheduler;
+//	@Autowired
+//	ThreadPoolTaskScheduler threadPoolTaskScheduler;
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
