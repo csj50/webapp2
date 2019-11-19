@@ -26,8 +26,8 @@ import com.study.schedule.MyTask1;
 public class TaskTest {
 	protected static Logger logger = LoggerFactory.getLogger(TaskTest.class);
 	
-//	@Autowired
-//	ThreadPoolTaskExecutor threadPoolTaskExecutor;
+	@Autowired
+	ThreadPoolTaskExecutor threadPoolTaskExecutor;
 	
 //	@Autowired
 //	ThreadPoolTaskScheduler threadPoolTaskScheduler;

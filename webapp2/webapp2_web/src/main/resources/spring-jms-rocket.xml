@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:jms="http://www.springframework.org/schema/jms" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/jms
+        http://www.springframework.org/schema/jms/spring-jms.xsd">
+
+	<!--rocketmq 生产者定义-->
+	<bean id="defaultMQProducer" class="org.apache.rocketmq.client.producer.DefaultMQProducer"
+		init-method="start" destroy-method="shutdown">
+		<property name="producerGroup" value="${rocketmq.producer.group}" />
+		<property name="namesrvAddr" value="${rocketmq.nameserver.addr}" />
+	</bean>
+	
+	<!--rocketmq 消费者定义-->
+    <bean id="defaultMQPushConsumer" class="com.study.base.jms.DefaultMQPushConsumerLazyInit" destroy-method="shutdown">
+        <property name="namesrvAddr" value="${rocketmq.nameserver.addr}"/>
+        <property name="consumerGroup" value="${rocketmq.consumer.group}"/>
+        <!-- 消息监听器 -->
+        <property name="messageListener" ref="rocketmqMessageListeners"/>
+        <!--消费者线程最小数，默认10-->
+        <property name="consumeThreadMin" value="10"/>
+        <!--消费者线程最大数，默认10-->
+        <property name="consumeThreadMax" value="10"/>
+        <!--集群消费-->
+        <property name="messageModel" value="CLUSTERING"/>
+        <property name="subscription">
+            <map>
+                <entry key="${rocketmq.topic}" value="${rocketmq.result.tag}"/>
+            </map>
+        </property>
+    </bean>
+    
+    <!--rocketmq 消息监听器定义-->
+    <bean id="rocketmqMessageListeners" class="com.study.base.handler.RocketmqMessageListeners"/>
+    
+</beans>
