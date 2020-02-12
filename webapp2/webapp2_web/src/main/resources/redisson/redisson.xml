@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:redisson="http://redisson.org/schema/redisson"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://redisson.org/schema/redisson
+       http://redisson.org/schema/redisson/redisson.xsd">
+
+	<!-- 最基本配置 -->
+	<redisson:client>
+		<redisson:sentinel-servers master-name="001_master" password="123_12345678^_00">
+			<redisson:sentinel-address value="redis://192.168.100.1:20079" />
+			<redisson:sentinel-address value="redis://192.168.100.2:20079" />
+			<redisson:sentinel-address value="redis://192.168.100.3:20079" />
+		</redisson:sentinel-servers>
+	</redisson:client>
+
+</beans>

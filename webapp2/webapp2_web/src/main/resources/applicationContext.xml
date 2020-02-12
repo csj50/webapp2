@@ -24,6 +24,7 @@
 	<import resource="classpath:/spring-cache.xml"/>
 	<import resource="classpath:/spring-job.xml"/>
 	<import resource="classpath:/spring-jms-rocket.xml"/>
+	<import resource="classpath:/redisson/redisson.xml"/>
 
 	<!-- 下面可以声明bean -->
 	<!-- <bean id="id.student1" name="name.student1" class="com.study.testBean.Student">

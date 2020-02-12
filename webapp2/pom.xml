@@ -239,6 +239,17 @@
 			<artifactId>rocketmq-client</artifactId>
 			<version>4.5.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson</artifactId>
+			<version>3.12.0</version>
+		</dependency>
+		<!--redisson 中部分功能依赖了netty -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>4.1.44.Final</version>
+		</dependency>
 	</dependencies>
 
 	<!-- 环境切换参数 -->
