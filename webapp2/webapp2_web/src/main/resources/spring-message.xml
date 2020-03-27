@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+     	 http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 资源加载 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="useCodeAsDefaultMessage" value="true" />
+		<property name="basenames">
+			<array>
+				<value>classpath:/env/message</value>
+			</array>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<!-- 资源访问器 -->
+	<bean id="msa" class="com.study.base.common.MessageSourceAccessor">
+		<constructor-arg>
+			<ref bean="messageSource" />
+		</constructor-arg>
+	</bean>
+</beans>
