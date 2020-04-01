@@ -8,12 +8,13 @@
        http://redisson.org/schema/redisson/redisson.xsd">
 
 	<!-- 最基本配置 -->
-	<redisson:client>
+	<!-- 如没有redis环境可将此段注释 -->
+	<!-- <redisson:client>
 		<redisson:sentinel-servers master-name="001_master" password="123_12345678^_00">
-			<redisson:sentinel-address value="redis://192.168.100.1:20079" />
-			<redisson:sentinel-address value="redis://192.168.100.2:20079" />
-			<redisson:sentinel-address value="redis://192.168.100.3:20079" />
+			<redisson:sentinel-address value="redis://104.223.143.111:20079" />
+			<redisson:sentinel-address value="redis://134.73.55.27:20079" />
+			<redisson:sentinel-address value="redis://104.223.170.60:20079" />
 		</redisson:sentinel-servers>
-	</redisson:client>
+	</redisson:client> -->
 
 </beans>
