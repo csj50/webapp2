@@ -17,6 +17,7 @@
 	</context:component-scan>
 
 	<!-- 下面可以导入其他spring配置文件 -->
+	<!-- 测试时可注释部分引用 -->
 	<import resource="classpath:/spring-env.xml" />
 	<import resource="classpath:/spring-datasource.xml"/>
 	<import resource="classpath:/spring-transaction.xml"/>
