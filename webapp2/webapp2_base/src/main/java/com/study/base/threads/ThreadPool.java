@@ -2,6 +2,8 @@ package com.study.base.threads;
 
 import java.util.LinkedList;
 
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -158,6 +160,14 @@ public class ThreadPool extends ThreadGroup implements InitializingBean {
 		}// end run
 	}// end workThread
 
+	/**
+	 * 优雅的关闭
+	 */
+	@PreDestroy
+	public void prdDestroy() {
+		closePool();
+	}
+
 	public LinkedList<Runnable> getWorkQueue() {
 		return workQueue;
 	}
@@ -173,4 +183,5 @@ public class ThreadPool extends ThreadGroup implements InitializingBean {
 	public void setPoolSize(String poolSize) {
 		this.poolSize = poolSize;
 	}
+
 }
