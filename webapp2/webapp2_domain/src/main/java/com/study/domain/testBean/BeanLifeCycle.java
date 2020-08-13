@@ -11,11 +11,14 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.SmartLifecycle;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BeanLifeCycle
-		implements BeanNameAware, BeanFactoryAware, ApplicationContextAware, InitializingBean, DisposableBean {
+public class BeanLifeCycle implements BeanNameAware, BeanFactoryAware, ApplicationContextAware, InitializingBean,
+		DisposableBean, SmartLifecycle {
+
+	private boolean isRunning = false;
 
 	@Override
 	public void setBeanName(String name) {
@@ -50,6 +53,53 @@ public class BeanLifeCycle
 	@Override
 	public void destroy() throws Exception {
 		System.out.println("========== 执行DisposableBean接口");
+	}
+
+	@Override
+	public void start() {
+		System.out.println("========== 执行SmartLifecycle接口start方法");
+		isRunning = true;
+	}
+
+	@Override
+	public void stop() {
+		System.out.println("========== 执行SmartLifecycle接口stop方法");
+		isRunning = false;
+	}
+
+	/**
+	 * 返回true时start方法会被自动执行，返回false则不会
+	 */
+	@Override
+	public boolean isAutoStartup() {
+		System.out.println("========== 执行SmartLifecycle接口isAutoStartup方法");
+		return true;
+	}
+
+	/**
+	 * 1. 只有该方法返回false时，start方法才会被执行。<br/>
+	 * 2. 只有该方法返回true时，stop(Runnable callback)或stop()方法才会被执行。
+	 */
+	@Override
+	public boolean isRunning() {
+		System.out.println("========== 执行SmartLifecycle接口isRunning方法");
+		return isRunning;
+	}
+
+	/**
+	 * 如果工程中有多个实现接口SmartLifecycle的类，则这些类的start的执行顺序按getPhase方法返回值从小到大执行。<br/>
+	 * 例如：1比2先执行，-1比0先执行。 stop方法的执行顺序则相反，getPhase返回值较大类的stop方法先被调用，小的后被调用。
+	 */
+	@Override
+	public int getPhase() {
+		return 0;
+	}
+
+	@Override
+	public void stop(Runnable callback) {
+		System.out.println("========== 执行SmartLifecycle接口stop(Runnable callback)方法");
+		callback.run();
+		isRunning = false;
 	}
 
 }
