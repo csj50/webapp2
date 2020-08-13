@@ -9,6 +9,7 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.SmartLifecycle;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BeanLifeCycle implements BeanNameAware, BeanFactoryAware, ApplicationContextAware, InitializingBean,
-		DisposableBean, SmartLifecycle {
+		DisposableBean, SmartLifecycle, BeanPostProcessor {
 
 	private boolean isRunning = false;
 
@@ -100,6 +101,28 @@ public class BeanLifeCycle implements BeanNameAware, BeanFactoryAware, Applicati
 		System.out.println("========== 执行SmartLifecycle接口stop(Runnable callback)方法");
 		callback.run();
 		isRunning = false;
+	}
+
+	/**
+	 * 实例化Bean之前
+	 */
+	@Override
+	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+		if ("threadPool".equals(beanName)) {
+			System.out.println("========== 执行postProcessBeforeInitialization方法" + beanName);
+		}
+		return bean;
+	}
+
+	/**
+	 * 实例化Bean之后
+	 */
+	@Override
+	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+		if ("threadPool".equals(beanName)) {
+			System.out.println("========== 执行postProcessAfterInitialization方法" + beanName);
+		}
+		return bean;
 	}
 
 }
