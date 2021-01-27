@@ -13,7 +13,7 @@
 		<module>webapp2_module2</module>
 		<module>webapp2_web</module>
 		<module>webapp2_schedule</module>
-  </modules>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,6 +33,7 @@
 		<logback-ext-spring.version>0.1.5</logback-ext-spring.version>
 		<jcl.version>1.7.26</jcl.version>
 		<activemq.version>5.15.9</activemq.version>
+		<kettle.version>9.1.0.0-324</kettle.version>
 	</properties>
 
 	<dependencies>
@@ -229,16 +230,19 @@
 			<artifactId>activemq-spring</artifactId>
 			<version>${activemq.version}</version>
 		</dependency>
+		<!-- ehcache2 -->
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
 			<version>2.10.6</version>
 		</dependency>
+		<!-- rocketmq -->
 		<dependency>
 			<groupId>org.apache.rocketmq</groupId>
 			<artifactId>rocketmq-client</artifactId>
 			<version>4.5.2</version>
 		</dependency>
+		<!-- redis客户端 -->
 		<dependency>
 			<groupId>org.redisson</groupId>
 			<artifactId>redisson</artifactId>
@@ -250,11 +254,13 @@
 			<artifactId>netty-all</artifactId>
 			<version>4.1.44.Final</version>
 		</dependency>
+		<!-- xxl-job -->
 		<dependency>
 			<groupId>com.xuxueli</groupId>
 			<artifactId>xxl-job-core</artifactId>
 			<version>2.1.2</version>
 		</dependency>
+		<!-- 修改安全漏洞 -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
@@ -264,6 +270,33 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
 			<version>4.4.13</version>
+		</dependency>
+		<!-- kettle -->
+		<dependency>
+			<groupId>pentaho-kettle</groupId>
+			<artifactId>kettle-core</artifactId>
+			<version>${kettle.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>pentaho-kettle</groupId>
+			<artifactId>kettle-engine</artifactId>
+			<version>${kettle.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-vfs2</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>pentaho</groupId>
+			<artifactId>metastore</artifactId>
+			<version>${kettle.version}</version>
+		</dependency>
+		<!-- oracle驱动包 -->
+		<dependency>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<version>19.9.0.0</version>
 		</dependency>
 	</dependencies>
 
@@ -330,5 +363,23 @@
 		</plugins>
 
 	</build>
+	
+	<!-- pom里配置远程仓库 -->
+	<repositories>
+		<!-- kettle包仓库地址 -->
+		<repository>
+			<id>pentaho.resolve.repo</id>
+			<name>Pentaho Omni</name>
+			<url>http://nexus.pentaho.org/content/groups/omni</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
 	
 </project>
