@@ -34,6 +34,9 @@
 		<jcl.version>1.7.26</jcl.version>
 		<activemq.version>5.15.9</activemq.version>
 		<kettle.version>9.1.0.0-324</kettle.version>
+		<dubbo.version>2.6.9</dubbo.version>
+		<dubbo.spring.version>1.0.11</dubbo.spring.version>
+		<dubbo.registry.nacos.version>2.6.7</dubbo.registry.nacos.version>
 	</properties>
 
 	<dependencies>
@@ -298,6 +301,25 @@
 			<artifactId>ojdbc8</artifactId>
 			<version>19.9.0.0</version>
 		</dependency>
+		<!-- dubbo依赖 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<version>${dubbo.version}</version>
+		</dependency>
+		<!-- dubbo使用spring装配方式 -->
+		<dependency>
+			<groupId>com.alibaba.spring</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${dubbo.spring.version}</version>
+		</dependency>
+		<!-- dubbo nacos registry依赖 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo-registry-nacos</artifactId>
+			<version>${dubbo.registry.nacos.version}</version>
+		</dependency>
+		
 	</dependencies>
 
 	<!-- 环境切换参数 -->

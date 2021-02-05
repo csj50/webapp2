@@ -27,7 +27,9 @@
 	<import resource="classpath:/spring-jms-rocket.xml"/>
 	<import resource="classpath:/redisson/redisson.xml"/>
 	<import resource="classpath:/spring-message.xml"/>
-	<import resource="classpath:/spring-xxl-job.xml"/>
+	<!-- <import resource="classpath:/spring-xxl-job.xml"/> -->
+	<!-- <import resource="classpath:/spring-dubbo-provider.xml"/> -->
+	<!-- <import resource="classpath:/spring-dubbo-consumer.xml"/> -->
 
 	<!-- 下面可以声明bean -->
 	<!-- <bean id="id.student1" name="name.student1" class="com.study.testBean.Student">
