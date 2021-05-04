@@ -50,6 +50,13 @@ public class AtomicTryLock {
 			}else {
 				System.out.println(Thread.currentThread().getName() + ", 重试");
 			}
+			//释放cpu资源，避免cpu飙高
+//			try {
+//				Thread.sleep(1);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 	}
 
