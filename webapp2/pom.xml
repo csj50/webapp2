@@ -23,7 +23,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<springframework.version>4.3.25.RELEASE</springframework.version>
 		<aspectj.version>1.8.13</aspectj.version>
-		<commons-io.version>2.6</commons-io.version>
+		<commons-io.version>2.7</commons-io.version>
 		<commons-codec.version>1.12</commons-codec.version>
 		<commons-lang3.version>3.8.1</commons-lang3.version>
 		<commons-pool2.version>2.6.1</commons-pool2.version>
@@ -198,7 +198,7 @@
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.5.1</version>
+			<version>3.5.6</version>
 		</dependency>
 		<!-- mybatis-spring适配器 -->
 		<dependency>
