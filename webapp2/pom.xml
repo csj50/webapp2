@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.study</groupId>
 	<artifactId>webapp2</artifactId>
@@ -319,7 +321,7 @@
 			<artifactId>dubbo-registry-nacos</artifactId>
 			<version>${dubbo.registry.nacos.version}</version>
 		</dependency>
-		
+
 	</dependencies>
 
 	<!-- 环境切换参数 -->
@@ -385,14 +387,23 @@
 		</plugins>
 
 	</build>
-	
+
 	<!-- pom里配置远程仓库 -->
 	<repositories>
+		<!-- 阿里云仓库 -->
+		<repository>
+			<id>public</id>
+			<name>local private nexus</name>
+			<url>https://maven.aliyun.com/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
 		<!-- kettle包仓库地址 -->
 		<repository>
 			<id>pentaho.resolve.repo</id>
 			<name>Pentaho Omni</name>
-			<url>http://nexus.pentaho.org/content/groups/omni</url>
+			<url>https://nexus.pentaho.org/content/groups/omni/</url>
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
@@ -403,5 +414,5 @@
 			</snapshots>
 		</repository>
 	</repositories>
-	
+
 </project>
