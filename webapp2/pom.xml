@@ -36,7 +36,7 @@
 		<jcl.version>1.7.26</jcl.version>
 		<activemq.version>5.15.9</activemq.version>
 		<kettle.version>9.1.0.0-324</kettle.version>
-		<dubbo.version>2.6.9</dubbo.version>
+		<dubbo.version>2.6.12</dubbo.version>
 		<dubbo.spring.version>1.0.11</dubbo.spring.version>
 		<dubbo.registry.nacos.version>2.6.7</dubbo.registry.nacos.version>
 	</properties>
